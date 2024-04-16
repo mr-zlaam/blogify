@@ -13,3 +13,4 @@ app.get("/", (req, res, next) => {
 });
 
 app.use("/api/v1", adminRouter);
+// app.use("/api/v1");
