@@ -15,7 +15,7 @@ export default async function loginAdmin(
   try {
     const { email, password }: AdminTypes = req.body;
     if (!email || !password)
-      return HandleError(400, res, "This field is required");
+      return HandleResponse(400, res, "This field is required");
     let UserExistAlready;
 
     try {
