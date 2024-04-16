@@ -1,5 +1,5 @@
 import express from "express";
-import { adminRouter } from "./features/admin/admin.route";
+import { adminRouter } from "./features/roles/admin/admin.route";
 
 export const app = express();
 app.use(express.json());

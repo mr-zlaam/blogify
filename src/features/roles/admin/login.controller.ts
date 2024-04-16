@@ -1,10 +1,10 @@
 import type { NextFunction, Response, Request } from "express";
-import { HandleError, HandleResponse } from "../../utils/ExportUtils";
+import { HandleError, HandleResponse } from "../../../utils/ExportUtils";
 import type { AdminTypes } from "./admin.types";
 import { AdminModel } from "./admin.model";
 import bcrypt from "bcrypt";
 import { sign } from "jsonwebtoken";
-import { Config } from "../../config/_config";
+import { Config } from "../../../config/_config";
 
 export default async function loginAdmin(
   req: Request,
