@@ -27,13 +27,23 @@ export default async function registerAdmin(
         "You can have only one admin at one time",
       );
     }
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newAdmin = await AdminModel.create({
-      username: username.toLowerCase(),
-      password: hashedPassword,
-      email: email.toLowerCase(),
-      role: role.toLowerCase(),
-    });
+    let hashedPassword = "";
+    try {
+      hashedPassword = await bcrypt.hash(password, 10);
+    } catch (error) {
+      return next(HandleError(500, res, error));
+    }
+    let newAdmin;
+    try {
+      newAdmin = await AdminModel.create({
+        username: username.toLowerCase(),
+        password: hashedPassword,
+        email: email.toLowerCase(),
+        role: role.toLowerCase(),
+      });
+    } catch (error: any) {
+      return next(HandleError(500, res, error));
+    }
     const token = sign({ sub: newAdmin._id }, JWT_SECRETE, {
       expiresIn: "7d",
     });
