@@ -1,6 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
 import type { AdminTypes } from "./admin.types";
-
 import bcrypt from "bcrypt";
 import { HandleError, HandleResponse } from "../../utils/ExportUtils.ts";
 import { AdminModel } from "./admin.model.ts";
@@ -19,7 +18,6 @@ export default async function createAdmin(
     }
     password.length < 6 &&
       HandleResponse(403, res, "Password Must contain atleast 6 characters");
-
     const existingAdmin = await AdminModel.findOne({ role: "admin" });
     if (existingAdmin) {
       return HandleResponse(
