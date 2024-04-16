@@ -1,5 +1,5 @@
 import type { Response } from "express";
-export const HandleResponse = (
+const ApiResponse = (
   status: number,
   res: Response,
   message: string = "OK",
@@ -12,3 +12,4 @@ export const HandleResponse = (
     data: data,
   });
 };
+export default ApiResponse;

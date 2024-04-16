@@ -1,2 +1,2 @@
-export { HandleError } from "./HandleError";
-export { HandleResponse } from "./HandleResponse";
+export { default as HandleError } from "./HandleError";
+export { default as HandleResponse } from "./HandleResponse";
