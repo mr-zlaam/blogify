@@ -1,5 +1,4 @@
 import express from "express";
-import ThrowError from "./middleware/Errorhandler.middleware";
 import { adminRouter } from "./features/admin/admin.route";
 
 export const app = express();
@@ -13,5 +12,4 @@ app.get("/", (req, res, next) => {
   });
 });
 
-app.use(ThrowError);
 app.use("/api/v1", adminRouter);

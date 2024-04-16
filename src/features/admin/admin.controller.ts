@@ -1,8 +1,12 @@
-import { type NextFunction, type Request, type Response } from "express";
-import { HandleError } from "../../config/HandleError";
+import type { NextFunction, Request, Response } from "express";
 import type { AdminTypes } from "./admin.types";
+
 import bcrypt from "bcrypt";
-import { AdminModel } from "./admin.model";
+import { HandleError } from "../../utils/HandleError.ts";
+import { AdminModel } from "./admin.model.ts";
+import { Config } from "../../config/_config.ts";
+import { sign } from "jsonwebtoken";
+const { JWT_SECRETE } = Config;
 export default async function createAdmin(
   req: Request,
   res: Response,
@@ -27,7 +31,7 @@ export default async function createAdmin(
         }),
       );
     }
-    const existingAdmin = await AdminModel.find({ role: "admin" });
+    const existingAdmin = await AdminModel.findOne({ role: "admin" });
     if (existingAdmin) {
       return next(
         res.status(403).json({
@@ -44,12 +48,16 @@ export default async function createAdmin(
       email,
       role,
     });
+    const token = sign({ sub: newAdmin._id }, JWT_SECRETE, {
+      expiresIn: "7d",
+    });
     return res.status(200).json({
       success: true,
       status: 200,
       message: "Admin registered successfully",
+      accessToken: token,
     });
-  } catch (error) {
-    return next(HandleError(500, "unable to register admin for some reason!"));
+  } catch (error: any) {
+    return next(HandleError(400, res, error));
   }
 }
