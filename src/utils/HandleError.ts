@@ -5,7 +5,6 @@ export const HandleError = (status: number, res: Response, err: any) => {
     error: err.name,
     message: err.message,
     stack: err.stack,
-    data: null,
     cause: err.cause,
     name: err.name,
   });
