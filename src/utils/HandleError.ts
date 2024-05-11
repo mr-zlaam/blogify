@@ -1,5 +1,5 @@
 import type { Response } from "express";
-const ApiResponse = (status: number, res: Response, err: any) => {
+const ApiErrors = (status: number, res: Response, err: any) => {
   return res.status(status).json({
     success: false,
     error: err.name,
@@ -8,4 +8,4 @@ const ApiResponse = (status: number, res: Response, err: any) => {
     cause: err.cause,
   });
 };
-export default ApiResponse;
+export default ApiErrors;
