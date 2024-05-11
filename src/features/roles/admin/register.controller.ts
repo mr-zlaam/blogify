@@ -1,9 +1,9 @@
 import type { NextFunction, Request, Response } from "express";
 import type { AdminTypes } from "./admin.types.ts";
 import bcrypt from "bcrypt";
-import { HandleError, HandleResponse } from "../../../utils/ExportUtils.ts";
-import { AdminModel } from "./admin.model.ts";
-import { Config } from "../../../config/_config.ts";
+import { HandleError, HandleResponse } from "../../../utils/ExportUtils";
+import { AdminModel } from "./admin.model";
+import { Config } from "../../../config/_config";
 import { sign } from "jsonwebtoken";
 const { JWT_SECRETE } = Config;
 export default async function registerAdmin(
